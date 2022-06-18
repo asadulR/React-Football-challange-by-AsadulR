@@ -1,0 +1,9 @@
+body{
+  background-color: #383838;
+  min-height: 100vh;
+  display: flow-root;
+}
+.main-container-extra-style{
+  background-color: #212121;
+  margin-top: 40px;
+}

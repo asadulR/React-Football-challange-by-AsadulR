@@ -1,0 +1,24 @@
+
+th{
+    text-align: start;
+}
+.dropdown-extra-style{
+    background-color: #2d2d2d;
+    box-shadow: -2px 2px 20px rgba(0, 0, 0, 0.493);
+}
+
+.table-container{
+    background-color: #2d2d2d;
+    border-radius: 10px;
+}
+
+.player-update-field{
+    background-color: transparent;
+    border: 1px solid white;
+    height: 40px;
+    border-radius: 5px;
+    width: 100%;
+}
+.player-edit-modal{
+    background-color: #2d2d2d;
+}
