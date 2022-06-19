@@ -71,9 +71,9 @@ const SoccerManaging = () => {
     document.getElementById('file-upload').value = '';
 
   };
-  useEffect(()=>{
+  useEffect(() => {
     setExcelData(null)
-  },[excelFile])
+  }, [excelFile])
 
   return (
     <>
@@ -87,57 +87,61 @@ const SoccerManaging = () => {
 
       {/* modal here */}
       <>
-      <input type="checkbox" id="my-modal-file-upload" className="modal-toggle" />
-      <div className="modal mt-[-200px]">
-        <div className="modal-box w-11/12 max-w-5xl bg-black relative">
-          <h3 className="font-bold text-lg">Importer</h3>
-          <hr />
-          <p className="py-4">Roster File</p>
+        <input type="checkbox" id="my-modal-file-upload" className="modal-toggle" />
+        <div className="modal mt-[-200px]">
+          <div className="modal-box w-11/12 max-w-5xl bg-black relative">
+            <h3 className="font-bold text-lg">Importer</h3>
+            <hr />
+            <p className="py-4">Roster File</p>
 
-          <input type="file" id="file-upload" onChange={handleFile} className="border-2" />
-          <p>{excelFileError}</p>
+            <input type="file" id="file-upload" onChange={handleFile} className="border-2" />
+            <p>{excelFileError}</p>
 
-          {excelData && (
-            <div>
-              <h1>File summary</h1>
-              <div className="mt-16">
-                <table className="w-full">
-                  <tr>
-                    <th>Total Players</th>
-                    <th>Goalkeepers</th>
-                    <th>Defenders</th>
-                    <th>Midfielders</th>
-                    <th>Forwards</th>
-                  </tr>
-                  <tr>
-                    <td>{excelData?.length}</td>
-                    <td>{goalkeepers?.length}</td>
-                    <td>{defenders?.length}</td>
-                    <td>{midfilders?.length}</td>
-                    <td>{forwards?.length}</td>
-                  </tr>
-                </table>
+            {excelData && (
+              <div>
+                <h1>File summary</h1>
+                <div className="mt-16">
+                  <table className="w-full">
+                    <tr>
+                      <th>Total Players</th>
+                      <th>Goalkeepers</th>
+                      <th>Defenders</th>
+                      <th>Midfielders</th>
+                      <th>Forwards</th>
+                    </tr>
+                    <tr>
+                      <td>{excelData?.length}</td>
+                      <td>{goalkeepers?.length}</td>
+                      <td>{defenders?.length}</td>
+                      <td>{midfilders?.length}</td>
+                      <td>{forwards?.length}</td>
+                    </tr>
+                  </table>
+                </div>
+                <label
+                  htmlFor="my-modal-file-upload"
+                  onClick={passExcelData}
+                  className="btn btn-warning ml-auto"
+                >
+                  Upload
+                </label>
               </div>
+            )}
+            <div className="modal-action">
               <label
                 htmlFor="my-modal-file-upload"
-                onClick={passExcelData}
-                className="btn btn-warning ml-auto"
+                className="btn btn-xs absolute top-2 right-6"
               >
-                Upload
+                X
               </label>
             </div>
-          )}
-          <div className="modal-action">
-            <label
-              htmlFor="my-modal-file-upload"
-              className="btn btn-xs absolute top-2 right-6"
-            >
-              X
-            </label>
           </div>
         </div>
-      </div>
       </>
+
+      <div>
+        kjhgfghj
+      </div>
     </>
   );
 };
