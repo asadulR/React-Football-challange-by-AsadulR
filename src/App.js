@@ -7,9 +7,32 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineSearch } from "react-icons/ai";
 import "./App.css";
 import Football from "./images/football.png";
+import React, { useState } from "react";
+
+
+export const searchContext = React.createContext();
 
 function App() {
   const location = useLocation();
+  const [searchData, setSearchData] = useState('')
+  const [searchValue, setSearchValue] = useState('');
+  const [isFirstLoad, setFistLoad] = useState(false)
+
+  const hadleSearch = (e) =>{
+    if(e.key === "Enter"){
+      setSearchData(searchValue);
+    }
+  }
+
+  const handleButtonSearch = () =>{
+    setSearchData(searchValue);
+  }
+
+  const handleSearhValue = (e) =>{
+    setSearchValue(e.target.value);
+  }
+
+  
 
   return (
     <div className="max-w-[1600px] min-h-[800px] flex mx-auto main-container-extra-style">
@@ -53,6 +76,7 @@ function App() {
                 type="text"
                 name=""
                 id=""
+                
               />
             </div>
           </div>
@@ -65,20 +89,26 @@ function App() {
                 type="text"
                 className="border pl-10 text-xl bg-transparent w-80 h-12 rounded-md"
                 placeholder="Find Player"
-                name=""
-                id=""
+                onChange={handleSearhValue}
+                onKeyPress={hadleSearch}
               />
+              {
+                searchValue && <button onClick={handleButtonSearch} className="absolute right-4 top-3 font-semibold text-yellow-500">search</button>
+              }
             </div>
             <label
               style={{ cursor: "pointer" }}
-              htmlFor="my-modal"
-              className="border px-3 h-12 rounded-md flex items-center"
+              htmlFor="my-modal-file-upload"
+              className={` px-3 h-12 rounded-md flex font-semibold items-center ${isFirstLoad?'border':'bg-yellow-600'}`}
             >
-              Re-Import Team
+              {isFirstLoad?'Re-':''}Import Team
             </label>
           </div>
         </div>
-        <Routes>
+        <searchContext.Provider
+          value={{searchData, setFistLoad}}
+        >
+            <Routes>
           <Route path="/" element={<SoccerManaging></SoccerManaging>}>
             <Route
               path="rosterDetails"
@@ -90,6 +120,8 @@ function App() {
             ></Route>
           </Route>
         </Routes>
+        </searchContext.Provider>
+        
       </div>
     </div>
   );

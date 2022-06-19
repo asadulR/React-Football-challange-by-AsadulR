@@ -68,7 +68,12 @@ const SoccerManaging = () => {
 
   const passExcelData = () => {
     setExcelFile(excelData);
+    document.getElementById('file-upload').value = '';
+
   };
+  useEffect(()=>{
+    setExcelData(null)
+  },[excelFile])
 
   return (
     <>
@@ -81,14 +86,15 @@ const SoccerManaging = () => {
       </div>
 
       {/* modal here */}
-      <input type="checkbox" id="my-modal" className="modal-toggle" />
+      <>
+      <input type="checkbox" id="my-modal-file-upload" className="modal-toggle" />
       <div className="modal mt-[-200px]">
         <div className="modal-box w-11/12 max-w-5xl bg-black relative">
           <h3 className="font-bold text-lg">Importer</h3>
           <hr />
           <p className="py-4">Roster File</p>
 
-          <input type="file" onChange={handleFile} className="border-2" />
+          <input type="file" id="file-upload" onChange={handleFile} className="border-2" />
           <p>{excelFileError}</p>
 
           {excelData && (
@@ -113,7 +119,7 @@ const SoccerManaging = () => {
                 </table>
               </div>
               <label
-                htmlFor="my-modal"
+                htmlFor="my-modal-file-upload"
                 onClick={passExcelData}
                 className="btn btn-warning ml-auto"
               >
@@ -123,7 +129,7 @@ const SoccerManaging = () => {
           )}
           <div className="modal-action">
             <label
-              htmlFor="my-modal"
+              htmlFor="my-modal-file-upload"
               className="btn btn-xs absolute top-2 right-6"
             >
               X
@@ -131,6 +137,7 @@ const SoccerManaging = () => {
           </div>
         </div>
       </div>
+      </>
     </>
   );
 };

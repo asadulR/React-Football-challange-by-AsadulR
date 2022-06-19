@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./RosterDetails.css";
 import { useContext } from "react";
 import { dataContext } from "../SoccerManaging/SoccerManaging";
 import SinglePlayer from "./SinglePlayer";
+import { searchContext } from "../../App";
+import { useEffect } from "react";
 const RosterDetails = () => {
   const playerData = useContext(dataContext);
+  const {searchData, setFistLoad} = useContext(searchContext);
+  const { excelFile } = playerData;
+  const [dataShow, setDataShow] = useState([])
 
-  const { excelFile, setExcelFileetMyData } = playerData;
-  console.log(excelFile);
+  useEffect(()=>{
+    if(excelFile){
+      if(searchData === ''){
+        setDataShow(excelFile)
+      }
+      else{
+        const data = excelFile.filter(player => player['Player Name'].toLowerCase().includes(searchData.toLowerCase()));
+        setDataShow(data);
+      }
+      setFistLoad(true)
+    }
+  },[searchData,excelFile, setFistLoad])
+  
+
   return (
     <div>
       <div className="min-h-[700px]">
@@ -28,8 +45,8 @@ const RosterDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {excelFile &&
-                excelFile.map((player) => (
+              {dataShow &&
+                dataShow.map((player) => (
                   <SinglePlayer
                     key={player["Player Name"]}
                     player={player}
