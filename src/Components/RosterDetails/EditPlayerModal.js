@@ -73,10 +73,10 @@ const EditPlayerModal = ({ playerEdit, setPlayerEdit }) => {
     }
 
     targetPlayer["Player Name"] = playerName;
-    targetPlayer["Jersey Number"] = playerJersey;
-    targetPlayer["Height"] = playerHeight;
     targetPlayer["Weight"] = playerWeight;
+    targetPlayer["Height"] = playerHeight;
     targetPlayer["Nationality"] = playerNationality;
+    targetPlayer["Jersey Number"] = playerJersey;
     targetPlayer["Position"] = playerPosition;
     playersWithoutTarget.splice(targetPlayerIndex,0,targetPlayer);
     setExcelFile(playersWithoutTarget);
