@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import * as XLSX from "xlsx";
-
 export const dataContext = React.createContext();
 
 const SoccerManaging = () => {
-  //onchange states
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
 
-  //this state will contain the excel data as JSON
   const [excelData, setExcelData] = useState(null);
 
-  // players info
   const [goalkeepers, setGoalkeepers] = useState([]);
   const [defenders, setDefenders] = useState([]);
   const [midfilders, setMidfielders] = useState([]);
@@ -35,7 +31,7 @@ const SoccerManaging = () => {
           setExcelData(data);
         };
       } else {
-        setExcelFileError("Please select only excel file types");
+        setExcelFileError("Please select only file types .csv");
       }
     } else {
       console.log("please select your file");
@@ -85,7 +81,7 @@ const SoccerManaging = () => {
         </dataContext.Provider>
       </div>
 
-      {/* modal here */}
+      {/* This is modal  */}
       <>
         <input type="checkbox" id="my-modal-file-upload" className="modal-toggle" />
         <div className="modal mt-[-200px]">
@@ -139,9 +135,7 @@ const SoccerManaging = () => {
         </div>
       </>
 
-      <div>
-        kjhgfghj
-      </div>
+      
     </>
   );
 };
