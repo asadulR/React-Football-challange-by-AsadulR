@@ -5,15 +5,20 @@ import SoccerManaging from "./components/SoccerManaging/SoccerManaging";
 import { BsDot, BsFillPeopleFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineSearch } from "react-icons/ai";
+import { MdModeEditOutline } from "react-icons/md";
 import "./App.css";
 import Football from "./images/football.png";
 import React, { useState } from "react";
-
 
 export const searchContext = React.createContext();
 
 function App() {
   const location = useLocation();
+  const [teamName, setTeamName] = useState('My Team');
+  const [showName, setShowName] = useState('My Team');
+  const [showInputField, setShowInputField] = useState(false)
+  const [showEdit, setShowEdit] = useState(true);
+  const [hoverShow, setHoverShow] = useState(false)
   const [searchData, setSearchData] = useState('')
   const [searchValue, setSearchValue] = useState('');
   const [isFirstLoad, setFistLoad] = useState(false)
@@ -21,18 +26,36 @@ function App() {
   const hadleSearch = (e) =>{
     if(e.key === "Enter"){
       setSearchData(searchValue);
+      setSearchValue('');
     }
   }
 
   const handleButtonSearch = () =>{
     setSearchData(searchValue);
+    setSearchValue('')
   }
 
   const handleSearhValue = (e) =>{
     setSearchValue(e.target.value);
   }
+  const editTeamName = (e) =>{
+    setTeamName(e.target.value);
+}
 
-  
+  const changeName = () =>{
+    setShowName(teamName);
+    setShowInputField(false)
+    setShowEdit(false)
+    setHoverShow(false)
+  }
+  const changeNameEnter = (e) =>{
+    if(e.key === 'Enter'){
+      setShowName(teamName);
+      setShowInputField(false)
+      setShowEdit(false)
+      setHoverShow(false)
+    }
+  }
 
   return (
     <div className="max-w-[1600px] min-h-[800px] flex mx-auto main-container-extra-style">
@@ -69,15 +92,28 @@ function App() {
                 ? "Roster Details"
                 : "Formation overview"}
             </p>
-            <div>
-              <input
-                className="bg-transparent hover:outline-none text-xl font-semibold outline-none"
-                value="Paris Saint-Germain F.C."
+            <div className="">
+              {
+                showInputField?<input
+                className="bg-transparent hover:outline-none text-xl font-semibold outline-none border pl-2 py-1 rounded-md"
+                value={teamName}
                 type="text"
-                name=""
-                id=""
-                
-              />
+                maxLength={30}
+                onBlur={changeName}
+                onKeyPress={changeNameEnter}
+                onChange={editTeamName}
+              />:<div className="flex items-center gap-2 text-xl font-semibold" onMouseEnter={()=>setHoverShow(true)} onMouseLeave={()=>setHoverShow(false)}><span>{showName}</span> 
+                {
+                  showEdit && <button onClick={()=>setShowInputField(true)}><MdModeEditOutline></MdModeEditOutline></button>
+                }
+                {
+                  !showEdit && <button className={`${!hoverShow && 'hidden'}`} onClick={()=>setShowInputField(true)}><MdModeEditOutline></MdModeEditOutline></button>
+                }
+              </div>
+              }
+              
+              
+              
             </div>
           </div>
           <div className="flex items-center gap-4">
